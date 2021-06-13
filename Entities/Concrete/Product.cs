@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Entities.Concrete
 {
-    public class Prodcut:IEntity
+    public class Product:IEntity
     {
         public int ProductID { get; set; }
         public string ProductName { get; set; }
