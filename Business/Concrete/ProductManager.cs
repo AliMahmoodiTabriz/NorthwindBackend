@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utility.Results;
 using DataAccsess.Abstract;
 using DataAccsess.Concrete.EntityFramework;
 using Entities.Concrete;
@@ -18,34 +19,39 @@ namespace Business.Concrete
             _prodcutDal = prodcutDal;
         }
 
-        public Product Add(Product product)
+        public IDataResult<Product> Add(Product product)
         {
-            return _prodcutDal.Add(product);
+            //var isExsist = _prodcutDal.Get(p => p.ProductID == product.ProductID);
+            //if (isExsist != null)
+            //    return new ErrorDataResult<Product>("This product is already available");
+            return new SuccsessDataResult<Product>(_prodcutDal.Add(product));
         }
 
-        public void Delete(Product product)
+        public IResult Delete(Product product)
         {
             _prodcutDal.Delete(product);
+            return new SuccsessResult("The product has been successfully deleted");
         }
 
-        public Product GetById(int productId)
+        public IDataResult<Product> GetById(int productId)
         {
-            return _prodcutDal.Get(p => p.ProductID == productId);
+            return new SuccsessDataResult<Product>(_prodcutDal.Get(p => p.ProductID == productId));
         }
 
-        public List<Product> GetList()
+        public IDataResult<List<Product>> GetList()
         {
-            return _prodcutDal.GetList().ToList();
+            return new SuccsessDataResult<List<Product>>(_prodcutDal.GetList().ToList());
         }
 
-        public List<Product> GetListByCategoryId(int categoryId)
+        public IDataResult<List<Product>> GetListByCategoryId(int categoryId)
         {
-            return _prodcutDal.GetList(p => p.CategoryId == categoryId).ToList();
+            return new SuccsessDataResult<List<Product>>(_prodcutDal.GetList(p => p.CategoryId == categoryId).ToList());
         }
 
-        public void Update(Product product)
+        public IResult Update(Product product)
         {
             _prodcutDal.Update(product);
+            return new SuccsessResult("The product has been successfully updated");
         }
     }
 }
