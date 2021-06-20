@@ -13,6 +13,6 @@ namespace DataAccsess.Concrete.EntityFramework.Context
             optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=Northwind;Integrated Security=True");
         }
 
-        public DbSet<Product> Product { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
 }
