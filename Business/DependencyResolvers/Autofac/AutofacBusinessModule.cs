@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Business.Abstract;
 using Business.Concrete;
+using Core.Utility.Security.Jwt;
 using DataAccsess.Abstract;
 using DataAccsess.Concrete.EntityFramework;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -16,6 +17,12 @@ namespace Business.DependencyResolvers.Autofac
         {
             builder.RegisterType<ProductManager>().As<IProductService>();
             builder.RegisterType<EfProductDal>().As<IProdcutDal>();
+
+            builder.RegisterType<UserManager>().As<IUserService>();
+            builder.RegisterType<EfUserDal>().As<IUserDal>();
+
+            builder.RegisterType<AuthManager>().As<IAuthService>();
+            builder.RegisterType<TokenHelper>().As<ITokenHelper>();
         }
     }
 }

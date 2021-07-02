@@ -49,7 +49,7 @@ namespace Business.Concrete
                 return new ErrorDataResult<User>("User Not Found");
             }
 
-            if(!HashingHelper.VerifyPasswordHash(loginDto.Password, userCheck.PasswordSalt, userCheck.PasswordHash))
+            if(!HashingHelper.VerifyPasswordHash(loginDto.Password, userCheck.PasswordHash, userCheck.PasswordSalt))
             {
                 return new ErrorDataResult<User>("Password error");
             }

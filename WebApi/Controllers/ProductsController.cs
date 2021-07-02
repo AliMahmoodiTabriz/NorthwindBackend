@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Concrete;
 using Entities.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -32,6 +33,7 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "GetById")]
         [HttpGet("getbyid")]
         public IActionResult GetById(int productId)
         {
