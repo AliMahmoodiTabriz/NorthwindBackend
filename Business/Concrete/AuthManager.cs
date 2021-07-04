@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Entities.Concrete;
 using Core.Utility.Results;
 using Core.Utility.Security.Hashing;
@@ -37,7 +38,7 @@ namespace Business.Concrete
             };
             _userService.Add(user);
 
-            return new SuccsessDataResult<User>(user,"User Registed");
+            return new SuccsessDataResult<User>(user,Messages.UserRegistered);
         }
 
         public IDataResult<User> Login(UserForLoginDto loginDto)
@@ -46,22 +47,22 @@ namespace Business.Concrete
 
             if(userCheck==null)
             {
-                return new ErrorDataResult<User>("User Not Found");
+                return new ErrorDataResult<User>(Messages.UserNotFound);
             }
 
             if(!HashingHelper.VerifyPasswordHash(loginDto.Password, userCheck.PasswordHash, userCheck.PasswordSalt))
             {
-                return new ErrorDataResult<User>("Password error");
+                return new ErrorDataResult<User>(Messages.PasswordError);
             }
 
-            return new SuccsessDataResult<User>(userCheck, "Successful login");
+            return new SuccsessDataResult<User>(userCheck,Messages.SuccessfulLogin);
         }
 
         public IResult UserExists(string email)
         {
             if(_userService.GetByMail(email)!=null)
             {
-                return new ErrorResult("User Already Exists");
+                return new ErrorResult(Messages.UserAlreadyExists);
             }
 
             return new SuccsessResult();

@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utility.Results;
 using DataAccsess.Abstract;
 using DataAccsess.Concrete.EntityFramework;
@@ -30,7 +31,7 @@ namespace Business.Concrete
         public IResult Delete(Product product)
         {
             _prodcutDal.Delete(product);
-            return new SuccsessResult("The product has been successfully deleted");
+            return new SuccsessResult(Messages.ProductDeleted);
         }
 
         public IDataResult<Product> GetById(int productId)
@@ -51,7 +52,7 @@ namespace Business.Concrete
         public IResult Update(Product product)
         {
             _prodcutDal.Update(product);
-            return new SuccsessResult("The product has been successfully updated");
+            return new SuccsessResult(Messages.ProductUpdated);
         }
     }
 }

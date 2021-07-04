@@ -80,9 +80,8 @@ namespace WebApi.Controllers
 
         [HttpPost("delete")]
         public IActionResult Delete(Product product)
-        {
+        {            
             var result = _productService.Delete(product);
-
             if (!result.Succsess)
                 return BadRequest(result.Message);
 
