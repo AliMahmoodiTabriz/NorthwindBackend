@@ -1,3 +1,4 @@
+using Core.Extensions;
 using Core.Utility.Security.Encyption;
 using Core.Utility.Security.Jwt;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -60,7 +61,7 @@ namespace WebApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebApi v1"));
             }
-
+            app.UseMiddleware<ExceptionMiddleware>();
             app.UseRouting();
 
             app.UseAuthentication();
