@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Aspect.Autofac.Performance;
 using Core.Aspect.Autofac.Transaction;
 using Core.Utility.Results;
 using DataAccsess.Abstract;
@@ -9,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 
 namespace Business.Concrete
 {
@@ -40,6 +42,7 @@ namespace Business.Concrete
             return new SuccsessDataResult<Product>(_prodcutDal.Get(p => p.ProductID == productId));
         }
 
+        [PerformanceAspect(1)]
         public IDataResult<List<Product>> GetList()
         {
             return new SuccsessDataResult<List<Product>>(_prodcutDal.GetList().ToList());
