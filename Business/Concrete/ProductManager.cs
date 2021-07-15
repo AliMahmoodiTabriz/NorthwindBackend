@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Aspect.Autofac.Transaction;
 using Core.Utility.Results;
 using DataAccsess.Abstract;
 using DataAccsess.Concrete.EntityFramework;
@@ -49,6 +50,7 @@ namespace Business.Concrete
             return new SuccsessDataResult<List<Product>>(_prodcutDal.GetList(p => p.CategoryId == categoryId).ToList());
         }
 
+        [TransactionScopeAspect]
         public IResult Update(Product product)
         {
             _prodcutDal.Update(product);
