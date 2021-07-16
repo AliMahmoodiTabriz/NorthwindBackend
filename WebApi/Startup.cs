@@ -1,3 +1,5 @@
+using Core.CrossCuttingConcerns.Caching;
+using Core.CrossCuttingConcerns.Caching.Microsoft;
 using Core.Extensions;
 using Core.IOC;
 using Core.Utility.Security.Encyption;
@@ -52,8 +54,9 @@ namespace WebApi
                         IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOption.SecurityKey)
                     };
                 });
-
+            services.AddMemoryCache();
             services.AddScoped<Stopwatch>();
+            services.AddSingleton<ICacheManager, MemoryCacheManager>();
             ServiceTool.Create(services);
         }
 

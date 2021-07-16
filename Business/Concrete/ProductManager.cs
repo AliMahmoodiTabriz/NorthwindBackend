@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Aspect.Autofac.Caching;
 using Core.Aspect.Autofac.Performance;
 using Core.Aspect.Autofac.Transaction;
 using Core.Utility.Results;
@@ -37,17 +38,20 @@ namespace Business.Concrete
             return new SuccsessResult(Messages.ProductDeleted);
         }
 
+        [CacheAspect(1)]
         public IDataResult<Product> GetById(int productId)
         {
             return new SuccsessDataResult<Product>(_prodcutDal.Get(p => p.ProductID == productId));
         }
 
+        [CacheAspect(1)]
         [PerformanceAspect(1)]
         public IDataResult<List<Product>> GetList()
         {
             return new SuccsessDataResult<List<Product>>(_prodcutDal.GetList().ToList());
         }
 
+        [CacheAspect(1)]
         public IDataResult<List<Product>> GetListByCategoryId(int categoryId)
         {
             return new SuccsessDataResult<List<Product>>(_prodcutDal.GetList(p => p.CategoryId == categoryId).ToList());
