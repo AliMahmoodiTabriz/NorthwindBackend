@@ -24,6 +24,7 @@ namespace Business.Concrete
             _prodcutDal = prodcutDal;
         }
 
+        [CacheRemoveAspect("IProductService.Get")]
         public IDataResult<Product> Add(Product product)
         {
             //var isExsist = _prodcutDal.Get(p => p.ProductID == product.ProductID);
@@ -32,6 +33,7 @@ namespace Business.Concrete
             return new SuccsessDataResult<Product>(_prodcutDal.Add(product));
         }
 
+        [CacheRemoveAspect("IProductService.Get")]
         public IResult Delete(Product product)
         {
             _prodcutDal.Delete(product);
@@ -57,7 +59,8 @@ namespace Business.Concrete
             return new SuccsessDataResult<List<Product>>(_prodcutDal.GetList(p => p.CategoryId == categoryId).ToList());
         }
 
-        [TransactionScopeAspect]
+        //[TransactionScopeAspect]
+        [CacheRemoveAspect("IProductService.Get")]
         public IResult Update(Product product)
         {
             _prodcutDal.Update(product);
