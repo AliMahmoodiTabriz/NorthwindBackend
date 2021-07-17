@@ -1,8 +1,10 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
 using Core.Aspect.Autofac.Caching;
 using Core.Aspect.Autofac.Performance;
 using Core.Aspect.Autofac.Transaction;
+using Core.Aspect.Autofac.Validation;
 using Core.Utility.Results;
 using DataAccsess.Abstract;
 using DataAccsess.Concrete.EntityFramework;
@@ -25,6 +27,7 @@ namespace Business.Concrete
         }
 
         [CacheRemoveAspect("IProductService.Get")]
+        [ValidationAspect(typeof(ProductValidator), Priority = 0)]
         public IDataResult<Product> Add(Product product)
         {
             //var isExsist = _prodcutDal.Get(p => p.ProductID == product.ProductID);
