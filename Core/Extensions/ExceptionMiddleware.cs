@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Core.Utility.Results;
+using FluentValidation;
+using Microsoft.AspNetCore.Http;
 using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Core.Extensions
@@ -33,18 +33,32 @@ namespace Core.Extensions
         {
             httpContext.Response.ContentType = "application/json";
             httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-            string Message = "Internal Server Error";
-
-
+            string message = "Internal Server Error";
 
             string result = new ErrorDetails
             {
-                Message = Message,
+                Message = message,
                 StatusCode = httpContext.Response.StatusCode,
             }.ToString();
 
 
+            GetValidationException(httpContext, e,ref message,ref result);
+
             return httpContext.Response.WriteAsync(result);
+        }
+
+        private void GetValidationException(HttpContext httpContext, Exception e, ref string message, ref string result)
+        {
+            if(e.GetType()==typeof(ValidationException))
+            {
+                var exeption = (ValidationException)e;
+                httpContext.Response.StatusCode = (int)HttpStatusCode.UnprocessableEntity;
+                result = new ErrorDetails
+                {
+                    Message= exeption.Message,
+                    StatusCode = httpContext.Response.StatusCode,
+                }.ToString();
+            }
         }
     }
 }
