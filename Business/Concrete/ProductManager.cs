@@ -2,9 +2,11 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspect.Autofac.Caching;
+using Core.Aspect.Autofac.Logging;
 using Core.Aspect.Autofac.Performance;
 using Core.Aspect.Autofac.Transaction;
 using Core.Aspect.Autofac.Validation;
+using Core.CrossCuttingConcerns.Logging.Log4Net.Loggers;
 using Core.Utility.Results;
 using DataAccsess.Abstract;
 using DataAccsess.Concrete.EntityFramework;
@@ -44,6 +46,7 @@ namespace Business.Concrete
         }
 
         [CacheAspect(1)]
+        //[LogAspect(typeof(DatabaseLogger))]
         public IDataResult<Product> GetById(int productId)
         {
             return new SuccsessDataResult<Product>(_prodcutDal.Get(p => p.ProductID == productId));

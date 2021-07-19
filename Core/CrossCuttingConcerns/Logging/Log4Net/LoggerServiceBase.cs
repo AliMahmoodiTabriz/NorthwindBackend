@@ -46,7 +46,7 @@ namespace Core.CrossCuttingConcerns.Logging.Log4Net
             if (IsWarnEnabled)
                 _log.Warn(logMessage);
         }
-        public void Fata(object logMessage)
+        public void Fatal(object logMessage)
         {
             if (IsFatalEnabled)
                 _log.Fatal(logMessage);
