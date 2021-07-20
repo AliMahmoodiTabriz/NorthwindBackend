@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspect.Autofac.Caching;
@@ -45,6 +46,7 @@ namespace Business.Concrete
             return new SuccsessResult(Messages.ProductDeleted);
         }
 
+        [SecuredOperation("GetById")]
         [CacheAspect(1)]
         //[LogAspect(typeof(DatabaseLogger))]
         public IDataResult<Product> GetById(int productId)

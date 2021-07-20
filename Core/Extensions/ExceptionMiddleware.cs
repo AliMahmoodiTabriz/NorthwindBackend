@@ -1,4 +1,5 @@
-﻿using Core.Utility.Results;
+﻿using Core.Utility.Exceptions;
+using Core.Utility.Results;
 using FluentValidation;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -43,8 +44,23 @@ namespace Core.Extensions
 
 
             GetValidationException(httpContext, e,ref message,ref result);
+            GetAuthException(httpContext, e, ref message, ref result);
 
             return httpContext.Response.WriteAsync(result);
+        }
+
+        private void GetAuthException(HttpContext httpContext, Exception e, ref string message, ref string result)
+        {
+            if (e.GetType() == typeof(AuthException))
+            {
+                var exeption = (AuthException)e;
+                httpContext.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+                result = new ErrorDetails
+                {
+                    Message = exeption.Message,
+                    StatusCode = httpContext.Response.StatusCode,
+                }.ToString();
+            }
         }
 
         private void GetValidationException(HttpContext httpContext, Exception e, ref string message, ref string result)

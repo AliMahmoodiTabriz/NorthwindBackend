@@ -33,7 +33,7 @@ namespace WebApi.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "GetById")]
+       // [Authorize(Roles = "GetById")]
         [HttpGet("getbyid")]
         public IActionResult GetById(int productId)
         {
