@@ -7,9 +7,10 @@ namespace Core.Utility.Exceptions
 {
     public class AuthException: AuthenticationException
     {
-        public AuthException(string message):base(message)
+        public string MessageId { get; set; }
+        public AuthException(string message, string messageId) : base(message)
         {
-
+            MessageId = messageId;
         }
     }
 }

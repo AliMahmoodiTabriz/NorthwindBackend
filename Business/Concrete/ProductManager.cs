@@ -43,7 +43,7 @@ namespace Business.Concrete
         public IResult Delete(Product product)
         {
             _prodcutDal.Delete(product);
-            return new SuccsessResult(Messages.ProductDeleted);
+            return new SuccsessResult(Messages.ProductDeleted, Messages.ProductDeletedId);
         }
 
         [SecuredOperation("GetById")]
@@ -72,7 +72,7 @@ namespace Business.Concrete
         public IResult Update(Product product)
         {
             _prodcutDal.Update(product);
-            return new SuccsessResult(Messages.ProductUpdated);
+            return new SuccsessResult(Messages.ProductUpdated, Messages.ProductUpdatedId);
         }
     }
 }

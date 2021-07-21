@@ -1,4 +1,5 @@
-﻿using Castle.DynamicProxy;
+﻿using Business.Constants;
+using Castle.DynamicProxy;
 using Core.Extensions;
 using Core.IOC;
 using Core.Utility.Exceptions;
@@ -24,7 +25,7 @@ namespace Business.BusinessAspects.Autofac
         protected override void OnBefore(IInvocation invocation)
         {
             if (!_httpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
-                throw new AuthException("Authentication Denied");
+                throw new AuthException(Messages.AuthenticationDenied,Messages.AuthenticationDeniedId);
 
             var roleClaim = _httpContextAccessor.HttpContext.User.ClaimRoles();
 
@@ -34,7 +35,7 @@ namespace Business.BusinessAspects.Autofac
                     return;
             }
 
-            throw new AuthException("Authentication Denied");
+            throw new AuthException(Messages.AuthorizeationDenied,Messages.AuthorizeationDeniedId);
         }
     }
 }

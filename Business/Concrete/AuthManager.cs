@@ -38,7 +38,7 @@ namespace Business.Concrete
             };
             _userService.Add(user);
 
-            return new SuccsessDataResult<User>(user,Messages.UserRegistered);
+            return new SuccsessDataResult<User>(user,Messages.UserRegistered, Messages.UserRegisteredId);
         }
 
         public IDataResult<User> Login(UserForLoginDto loginDto)
@@ -47,22 +47,22 @@ namespace Business.Concrete
 
             if(userCheck==null)
             {
-                return new ErrorDataResult<User>(Messages.UserNotFound);
+                return new ErrorDataResult<User>(Messages.UserNotFound, Messages.UserNotFoundId);
             }
 
             if(!HashingHelper.VerifyPasswordHash(loginDto.Password, userCheck.PasswordHash, userCheck.PasswordSalt))
             {
-                return new ErrorDataResult<User>(Messages.PasswordError);
+                return new ErrorDataResult<User>(Messages.PasswordError, Messages.PasswordErrorId);
             }
 
-            return new SuccsessDataResult<User>(userCheck,Messages.SuccessfulLogin);
+            return new SuccsessDataResult<User>(userCheck,Messages.SuccessfulLogin, Messages.SuccessfulLoginId);
         }
 
         public IResult UserExists(string email)
         {
             if(_userService.GetByMail(email)!=null)
             {
-                return new ErrorResult(Messages.UserAlreadyExists);
+                return new ErrorResult(Messages.UserAlreadyExists, Messages.UserAlreadyExistsId);
             }
 
             return new SuccsessResult();

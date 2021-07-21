@@ -6,7 +6,7 @@ namespace Core.Utility.Results
 {
     public class SuccsessDataResult<T>:DataResult<T>
     {
-        public SuccsessDataResult(T data,string message):base(data,true,message)
+        public SuccsessDataResult(T data,string message,string messageId):base(data,true,message, messageId)
         {
 
         }
@@ -14,7 +14,7 @@ namespace Core.Utility.Results
         {
 
         }
-        public SuccsessDataResult(string message):base(default,true,message)
+        public SuccsessDataResult(string message,string messageId) :base(default,true,message, messageId)
         {
 
         }

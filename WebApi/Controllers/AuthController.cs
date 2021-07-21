@@ -26,14 +26,14 @@ namespace WebApi.Controllers
             var usetToLogin = _authService.Login(userForLoginDto);
             if(!usetToLogin.Succsess)
             {
-                return BadRequest(usetToLogin.Message);
+                return BadRequest(usetToLogin);
             }
 
             var result = _authService.CreateAccsessToken(usetToLogin.Data);
             if (result.Succsess)
                 return Ok(result.Data);
 
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
 
         [HttpPost("register")]
@@ -42,7 +42,7 @@ namespace WebApi.Controllers
             var usetToLogin = _authService.UserExists(userForRigster.Email);
             if (!usetToLogin.Succsess)
             {
-                return BadRequest(usetToLogin.Message);
+                return BadRequest(usetToLogin);
             }
 
 
@@ -51,7 +51,7 @@ namespace WebApi.Controllers
             if (result.Succsess)
                 return Ok(result.Data);
 
-            return BadRequest(result.Message);
+            return BadRequest(result);
         }
     }
 }

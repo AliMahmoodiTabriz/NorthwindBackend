@@ -6,7 +6,7 @@ namespace Core.Utility.Results
 {
     public class SuccsessResult : Result
     {
-        public SuccsessResult(string message):base(true,message)
+        public SuccsessResult(string message,string messageId):base(true,message, messageId)
         {
 
         }

@@ -7,7 +7,7 @@ namespace Core.Utility.Results
     public class DataResult<T> : Result, IDataResult<T>
     {
         public T Data { get; }
-        public DataResult(T data,bool succsess,string message):base(succsess,message)
+        public DataResult(T data,bool succsess,string message,string messageId) :base(succsess,message, messageId)
         {
             Data = data;
         }

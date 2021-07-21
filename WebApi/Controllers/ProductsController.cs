@@ -28,7 +28,7 @@ namespace WebApi.Controllers
             var result = _productService.GetList();
 
             if (!result.Succsess)
-                return BadRequest(result.Message);
+                return BadRequest(result);
 
             return Ok(result);
         }
@@ -40,7 +40,7 @@ namespace WebApi.Controllers
             var result = _productService.GetById(productId);
 
             if (!result.Succsess)
-                return BadRequest(result.Message);
+                return BadRequest(result);
 
             return Ok(result);
         }
@@ -51,7 +51,7 @@ namespace WebApi.Controllers
             var result = _productService.GetListByCategoryId(categoryId);
 
             if (!result.Succsess)
-                return BadRequest(result.Message);
+                return BadRequest(result);
 
             return Ok(result);
         }
@@ -63,7 +63,7 @@ namespace WebApi.Controllers
             var result = _productService.Add(product);
 
             if (!result.Succsess)
-                return BadRequest(result.Message);
+                return BadRequest(result);
 
             return Ok(result);
         }
@@ -73,7 +73,7 @@ namespace WebApi.Controllers
             var result = _productService.Update(product);
 
             if (!result.Succsess)
-                return BadRequest(result.Message);
+                return BadRequest(result);
 
             return Ok(result);
         }
@@ -83,7 +83,7 @@ namespace WebApi.Controllers
         {            
             var result = _productService.Delete(product);
             if (!result.Succsess)
-                return BadRequest(result.Message);
+                return BadRequest(result);
 
             return Ok(result);
         }

@@ -1,6 +1,7 @@
 ﻿using Castle.DynamicProxy;
 using Core.CrossCuttingConcerns.Logging.Log4Net;
 using Core.Utility.Interceptors;
+using Core.Utility.Messages;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,7 +15,7 @@ namespace Core.Aspect.Autofac.Exception
         {
             if (loggerService.BaseType != typeof(LoggerServiceBase))
             {
-                throw new System.Exception("Wrong Logger Type");
+                throw new System.Exception(CoreMessages.WrongLoggerType);
             }
 
             _loggerServiceBase = (LoggerServiceBase)Activator.CreateInstance(loggerService);
